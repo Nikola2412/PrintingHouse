@@ -4,5 +4,6 @@ import { SearchPage } from './search-page/search-page';
 
 export const routes: Routes = [
     {path:"",component:Frontpage},
-    {path:"search/category",component:SearchPage}
+    {path:"search",component:SearchPage},
+    {path:"search/:category",component:SearchPage}
 ];
