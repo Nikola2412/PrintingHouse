@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: #f5f7fa;
+}
+
+h1 {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+h3 {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+/* DESKTOP */
+.cards-container {
+    display: flex;
+    gap: 20px;
+
+    width: 100%;
+    max-width: 1400px;
+
+    height: 65vh;
+
+    margin: 0 auto;
+}
+
+.card {
+    flex-grow: 1;
+    width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+
+    transition:
+        flex-grow 0.4s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.card:hover {
+    flex-grow: 4;
+
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+    color: #1f2937;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* FOOTER */
+.card-footer {
+    margin-top: auto;
+
+    opacity: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .card-footer {
+    opacity: 1;
+}
+
+.desc {
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.likes {
+    align-self: flex-start;
+
+    background: #e8f5e9;
+    color: #2e7d32;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-weight: bold;
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+
+    .cards-container {
+        height: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        width: calc(50% - 10px);
+        flex-grow: unset;
+        min-height: 260px;
+    }
+
+    .card:hover {
+        flex-grow: unset;
+    }
+
+    .card-footer {
+        opacity: 1;
+    }
+
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .container {
+        padding: 20px;
+    }
+
+    .cards-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .card {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .card h3 {
+        font-size: 1.3rem;
+    }
+
+    .desc {
+        font-size: 0.95rem;
+    }
+
+}

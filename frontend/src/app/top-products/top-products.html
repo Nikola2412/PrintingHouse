@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>Printing House</h1>
+    <h3>Ukupan broj objekata: {{productCnt}}</h3>
+
+    <div class="cards-container">
+        @for(p of products; track p.id){
+        <div class="card">
+            <h3>{{p.name}}</h3>
+
+            <div class="card-footer">
+                <p class="desc">{{p.description}}</p>
+                <p class="likes">👍{{p.like_cnt}}</p>
+            </div>
+        </div>
+        }
+    </div>
+</div>
