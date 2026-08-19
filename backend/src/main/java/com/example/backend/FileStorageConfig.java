@@ -13,7 +13,7 @@ public class FileStorageConfig implements WebMvcConfigurer{
                 .get("backend/uploads")
                 .toAbsolutePath()
                 .normalize()
-                .toString();;
+                .toString();
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -24,6 +24,7 @@ public class FileStorageConfig implements WebMvcConfigurer{
 
         /*
         to protect folders from access
+        */
         registry
             .addResourceHandler("/images/products/**")
             .addResourceLocations("file:" + uploadPath + "/products/");
@@ -35,6 +36,5 @@ public class FileStorageConfig implements WebMvcConfigurer{
         registry
             .addResourceHandler("/images/categories/**")
             .addResourceLocations("file:" + uploadPath + "/categories/");
-         */
     }
 }

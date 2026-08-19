@@ -7,14 +7,12 @@
     <div class="cards-container">
         @for (p of products; track p.id) {
             <div class="card">
-
-                @if (p.image) {
                     <img
                         class="card-image"
-                        [src]="p.image"
+                        [src]="'http://localhost:8080/products/image/' + p.id"
                         [alt]="p.name"
                     >
-                }
+                
 
                 <div class="card-content">
                     <h3>{{ p.name }}</h3>

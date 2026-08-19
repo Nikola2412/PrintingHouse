@@ -123,7 +123,6 @@ CREATE TABLE products (
         ON UPDATE CURRENT_TIMESTAMP,
     like_count INT UNSIGNED NOT NULL DEFAULT 0,
     dislike_count INT UNSIGNED NOT NULL DEFAULT 0,
-    image VARCHAR(50) NOT NULL DEFAULT '',
 
     UNIQUE (printer_id, code),
 
@@ -578,8 +577,7 @@ VALUES (
     1200.00,
     150,
     10,
-    0,
-    "polo_majica.jpg"
+    0
 ),(
     1,
     'PR-002',
@@ -590,7 +588,6 @@ VALUES (
     100,
     20,
     0,
-    "pamucna_majica_sa_printom.jpg"
 ),(
     1,
     'PR-003',
@@ -601,7 +598,6 @@ VALUES (
     100,
     2,
     0,
-    "hemijska_olovka.jpg"
 ),(
     1,
     'PR-004',
@@ -612,7 +608,6 @@ VALUES (
     100,
     5,
     0,
-    "fascikle_sa_printom.jpg"
 ),(
     1,
     'PR-005',
@@ -623,7 +618,6 @@ VALUES (
     100,
     30,
     0,
-    "pozivnice.jpg"
 ),(
     1,
     'PR-006',
@@ -634,7 +628,6 @@ VALUES (
     50,
     50,
     0,
-    "rollup.jpg"
 ),(
     1,
     'PR-007',
@@ -645,7 +638,6 @@ VALUES (
     20,
     75,
     0,
-    "fototapeta.jpg"
 );
 
 
@@ -691,5 +683,23 @@ INSERT INTO product_images(
 )
 VALUES(
     1,
-    'majica.jpg',
+    "polo_majica.jpg"
+),(
+    2.
+    "pamucna_majica_sa_printom.jpg"
+),(
+    3,
+    "hemijska_olovka.jpg"
+),(
+    4,
+    "fascikle_sa_printom.jpg"
+),(
+    5,
+    "pozivnice.jpg"
+),(
+    6,
+    "rollup.jpg"
+),(
+    7,
+    "fototapeta.jpg"
 );

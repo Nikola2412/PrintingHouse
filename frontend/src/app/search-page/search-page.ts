@@ -32,7 +32,6 @@ export class SearchPage implements OnInit{
         .findProducts(this.category, this.searchTerm)
         .subscribe(data => {
           this.searchResults = data;
-          console.log(this.searchResults);
         });
     });
   }

@@ -1,6 +1,6 @@
 export class Product {
   id: number = 0;
-  print_id: string = '';
+  print_id: number = 0;
   code: string = '';
   name: string = '';
   description: string = '';
@@ -9,7 +9,8 @@ export class Product {
   stock: number = 0;
   like_cnt: number = 0;
   dislike_cnt: number = 0;
-  image: string = '';
+  //image: string = '';
+  /*
   constructor(
     id: number,
     print_id: string,
@@ -21,7 +22,7 @@ export class Product {
     stock: number,
     like_cnt: number,
     dislike_cnt: number,
-    image: string
+    //image: string
   ) {
     this.id = id;
     this.print_id = print_id;
@@ -33,7 +34,7 @@ export class Product {
     this.stock = stock;
     this.like_cnt = like_cnt;
     this.dislike_cnt = dislike_cnt;
-    this.image = image;
+    //this.image = image;
   }
-  
+  */
 }

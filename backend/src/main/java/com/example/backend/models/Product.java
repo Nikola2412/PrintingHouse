@@ -3,7 +3,7 @@ package com.example.backend.models;
 
 public class Product {
     private int id;
-    private String print_id;
+    private int print_id;
     private String code;
     private String name;
     private String description;
@@ -12,7 +12,7 @@ public class Product {
     private int stock;
     private int like_cnt;
     private int dislike_cnt;
-    private String image;
+    //private String image;
     public Product() {
     }
     public int getId() {
@@ -21,10 +21,10 @@ public class Product {
     public void setId(int id) {
         this.id = id;
     }
-    public String getPrint_id() {
+    public int getPrint_id() {
         return print_id;
     }
-    public void setPrint_id(String print_id) {
+    public void setPrint_id(int print_id) {
         this.print_id = print_id;
     }
     public String getCode() {
@@ -75,14 +75,16 @@ public class Product {
     public void setDislike_cnt(int dislike_cnt) {
         this.dislike_cnt = dislike_cnt;
     }
+    /*
     public String getImage() {
         return image;
     }
     public void setImage(String image) {
         this.image = "http://localhost:8080/images/products/" + image;
     }
-    public Product(int id, String print_id, String code, String name, String description, String subcategory,
-            double price, int stock, int like_cnt, int dislike_cnt, String image) {
+    */
+    public Product(int id, int print_id, String code, String name, String description, String subcategory,
+            double price, int stock, int like_cnt, int dislike_cnt) {
         this.id = id;
         this.print_id = print_id;
         this.code = code;
@@ -93,6 +95,6 @@ public class Product {
         this.stock = stock;
         this.like_cnt = like_cnt;
         this.dislike_cnt = dislike_cnt;
-        this.image = image;
+        //this.image = image;
     }
 }

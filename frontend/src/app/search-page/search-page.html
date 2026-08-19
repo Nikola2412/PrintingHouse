@@ -15,7 +15,9 @@
     <div class="products">
         @for (item of searchResults; track item.id){
             <div class="product">
-                <img src={{item.image}} alt={{item.name}} />
+                <img 
+                    [src]="'http://localhost:8080/products/image/' + item.id"
+                    [alt]="item.name"/>
                 <h1>{{item.name}}</h1>
                 <p>{{item.description}}</p>
                 <p>{{item.price}} RSD</p>
@@ -33,7 +35,10 @@
         </tr>
         @for (item of searchResults; track item.id){
             <tr>
-                <td><img src={{item.image}} alt={{item.name}}/></td>
+                <td><img 
+                    [src]="'http://localhost:8080/products/image/' + item.id"
+                    [alt]="item.name"/>
+                    </td>
                 <td>{{item.name}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.price}} RSD</td>

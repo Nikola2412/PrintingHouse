@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Product } from '../models/Product';
 import { Message } from '../models/Message';
+import { ProductInfo } from '../models/ProductInfo';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,12 @@ export class ProductsService {
     return this.http.get<Product[]>(`${this.path}/getTopProducts`);
   }
 
-  findProductById(id: number) {
-    return this.http.get<Product>(`${this.path}/findById?id=${id}`);
+  productDitails(id:string) {
+    return this.http.get<ProductInfo>(`${this.path}/productDitails?id=${id}`);
+  }
+
+  findProductById(id: string) {
+    return this.http.get<Product>(`${this.path}/product?id=${id}`);
   }
 
   findProducts(category: string, param: string){
