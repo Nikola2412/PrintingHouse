@@ -1,162 +1,525 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .container {
     min-height: 100vh;
-    padding: 40px 20px;
+    padding: 30px;
+
     background: #f5f7fa;
 }
 
-h1 {
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.container > h1 {
     text-align: center;
+
     font-size: clamp(2rem, 5vw, 3rem);
+
     color: #2c3e50;
-    margin-bottom: 10px;
+
+    margin: 0 0 10px;
 }
 
-h3 {
+.container > h3 {
     text-align: center;
+
     color: #7f8c8d;
-    margin-bottom: 30px;
+
+    margin: 0 0 30px;
 }
 
-/* DESKTOP */
+
+/* =========================
+   CARDS CONTAINER
+========================= */
+
 .cards-container {
     display: flex;
-    gap: 20px;
+
+    gap: 16px;
 
     width: 100%;
-    max-width: 1400px;
+    max-width: 1500px;
 
     height: 65vh;
 
     margin: 0 auto;
 }
 
+
+/* =========================
+   CARD
+========================= */
+
 .card {
-    flex-grow: 1;
-    width: 0;
+    flex: 1 1 0;
+
+    min-width: 0;
 
     display: flex;
     flex-direction: column;
 
-    padding: 24px;
-
-    background: white;
+    background: #ffffff;
 
     border-radius: 18px;
 
     overflow: hidden;
 
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.10);
 
+    /*
+     * Smoothly resize the cards when
+     * another card is hovered.
+     */
     transition:
-        flex-grow 0.4s ease,
+        flex 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         transform 0.3s ease,
         box-shadow 0.3s ease;
 }
 
-.card:hover {
-    flex-grow: 4;
+
+/* =========================
+   CARD HOVER / EXPANSION
+========================= */
+
+/*
+ * When the container is hovered,
+ * shrink all cards slightly.
+ */
+.cards-container:hover .card {
+    flex: 0.7;
+}
+
+
+/*
+ * Expand only the card currently
+ * being hovered.
+ */
+.cards-container .card:hover {
+    flex: 3;
 
     transform: translateY(-6px);
 
     box-shadow:
-        0 14px 28px rgba(0, 0, 0, 0.2);
+        0 14px 30px rgba(0, 0, 0, 0.18);
 }
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.card-image {
+    width: 100%;
+
+    height: 50%;
+
+    flex-shrink: 0;
+
+    object-fit: scale-down;
+
+    object-position: center;
+
+    /*
+     * Small image animation.
+     */
+    transition:
+        transform 0.5s ease;
+}
+
+
+/*
+ * Slightly enlarge the image
+ * when the card is hovered.
+ */
+.card:hover .card-image {
+    transform: scale(1.03);
+}
+
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card-content {
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 24px;
+}
+
+
+/* =========================
+   CARD TITLE
+========================= */
 
 .card h3 {
     color: #1f2937;
+
     font-size: 1.5rem;
-    margin-bottom: 20px;
+
+    margin-top: auto;
+
+    margin-bottom: 0;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    transition:
+        transform 0.4s ease,
+        font-size 0.4s ease;
 }
 
-/* FOOTER */
+
+/*
+ * Slightly move the title when
+ * the card opens.
+ */
+.card:hover h3 {
+    transform: translateY(-3px);
+}
+
+
+/* =========================
+   CARD FOOTER
+========================= */
+
 .card-footer {
-    margin-top: auto;
+    /*
+     * Instead of height: 0,
+     * use CSS Grid to create a
+     * smoothly expanding section.
+     */
+    display: grid;
+
+    grid-template-rows: 0fr;
 
     opacity: 0;
 
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    margin-top: 0;
 
-    transition: opacity 0.3s ease;
+    transform: translateY(15px);
+
+    transition:
+        grid-template-rows 0.45s ease,
+        opacity 0.35s ease,
+        transform 0.45s ease,
+        margin-top 0.45s ease;
 }
 
+
+/*
+ * This allows the inner content
+ * to collapse properly.
+ */
+.card-footer > * {
+    overflow: hidden;
+}
+
+
+/*
+ * Open the footer when hovering
+ * over the card.
+ */
 .card:hover .card-footer {
+    grid-template-rows: 1fr;
+
     opacity: 1;
+
+    margin-top: 20px;
+
+    transform: translateY(0);
 }
+
+
+/* =========================
+   DESCRIPTION
+========================= */
 
 .desc {
     color: #4b5563;
+
     line-height: 1.6;
+
+    margin: 0;
 }
 
-.likes {
-    align-self: flex-start;
 
-    background: #e8f5e9;
-    color: #2e7d32;
+/* =========================
+   PRICE / STOCK
+========================= */
 
+.card-info {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 16px;
+}
+
+.price {
+    color: #111827;
+
+    font-size: 1.2rem;
+
+    font-weight: bold;
+}
+
+.stock {
+    color: #6b7280;
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================
+   REACTIONS
+========================= */
+
+.reactions {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 16px;
+}
+
+.likes,
+.dislikes {
     padding: 8px 14px;
 
     border-radius: 999px;
 
     font-weight: bold;
+
+    white-space: nowrap;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease;
 }
 
-/* TABLET */
-@media (max-width: 992px) {
+
+/* Likes */
+
+.likes {
+    background: #e8f5e9;
+
+    color: #2e7d32;
+}
+
+
+/* Dislikes */
+
+.dislikes {
+    background: #ffebee;
+
+    color: #c62828;
+}
+
+
+/*
+ * Small hover effect on reactions.
+ */
+.likes:hover,
+.dislikes:hover {
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
 
     .cards-container {
         height: auto;
-        flex-wrap: wrap;
-        justify-content: center;
+
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 20px;
     }
 
+
+    /*
+     * Disable desktop flex animation.
+     */
     .card {
-        width: calc(50% - 10px);
-        flex-grow: unset;
-        min-height: 260px;
+        min-height: 450px;
+
+        flex: none;
     }
+
+    .cards-container:hover .card,
+    .cards-container .card:hover {
+        flex: none;
+    }
+
+
+    /*
+     * Show information all the time
+     * on tablet.
+     */
+    .card-footer {
+        grid-template-rows: 1fr;
+
+        opacity: 1;
+
+        margin-top: 20px;
+
+        transform: none;
+    }
+
 
     .card:hover {
-        flex-grow: unset;
+        transform: translateY(-4px);
     }
-
-    .card-footer {
-        opacity: 1;
-    }
-
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 768px) {
 
     .container {
         padding: 20px;
     }
 
+
     .cards-container {
+        display: flex;
+
         flex-direction: column;
+
+        gap: 20px;
+
         height: auto;
     }
 
+
     .card {
         width: 100%;
-        min-height: auto;
+
+        min-height: 500px;
+
+        flex: none;
     }
+
+
+    /*
+     * Disable desktop expansion.
+     */
+    .cards-container:hover .card,
+    .cards-container .card:hover {
+        flex: none;
+    }
+
+
+    /* Image */
+
+    .card-image {
+        height: 260px;
+    }
+
+
+    /* Title */
 
     .card h3 {
         font-size: 1.3rem;
     }
 
+
+    /* Description */
+
     .desc {
         font-size: 0.95rem;
     }
 
+
+    /* Price / stock */
+
+    .card-info {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    /*
+     * Always show information
+     * on mobile.
+     */
+    .card-footer {
+        grid-template-rows: 1fr;
+
+        opacity: 1;
+
+        margin-top: 20px;
+
+        transform: none;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+    .container {
+        padding: 15px;
+    }
+
+
+    .container > h1 {
+        font-size: 2rem;
+    }
+
+
+    .container > h3 {
+        font-size: 1rem;
+    }
+
+
+    .card {
+        min-height: 450px;
+
+        border-radius: 14px;
+    }
+
+
+    .card-content {
+        padding: 18px;
+    }
+
+
+    .card-image {
+        height: 220px;
+    }
+
+
+    .card h3 {
+        font-size: 1.2rem;
+    }
 }

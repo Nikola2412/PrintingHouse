@@ -1,1 +1,44 @@
-<p>search-page works!</p>
+<div class="view-toggle">
+    <button 
+        [class.active]="gridView"
+        (click)="gridView = true">
+        ▦ Grid
+    </button>
+
+    <button 
+        [class.active]="!gridView"
+        (click)="gridView = false">
+        ☷ Table
+    </button>
+</div>
+@if (gridView === true){
+    <div class="products">
+        @for (item of searchResults; track item.id){
+            <div class="product">
+                <img src={{item.image}} alt={{item.name}} />
+                <h1>{{item.name}}</h1>
+                <p>{{item.description}}</p>
+                <p>{{item.price}} RSD</p>
+                <button (click)="Ditails(item)">Ditails</button>
+            </div>
+        }
+    </div>
+}@else {
+    <table>
+        <tr>
+            <th>Product image</th>
+            <th>Product name</th>
+            <th>Product description</th>
+            <th>Product price</th>
+        </tr>
+        @for (item of searchResults; track item.id){
+            <tr>
+                <td><img src={{item.image}} alt={{item.name}}/></td>
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.price}} RSD</td>
+                <td><button (click)="Ditails(item)">Ditails</button></td>
+            </tr>
+        }
+    </table>
+}

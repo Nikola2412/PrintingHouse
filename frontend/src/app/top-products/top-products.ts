@@ -12,11 +12,10 @@ import { FormsModule } from '@angular/forms';
 export class TopProducts implements OnInit {
   private productsService = inject(ProductsService);
   products: Product[] = [];
-  productCnt: number = 0;
+  productCnt: number = -1;
   ngOnInit(): void {
     this.productsService.getTopProducts().subscribe(data=>{
       this.products = data;
-      console.log(this.products)
     })
     this.productsService.getProductCnt().subscribe(data=>{
       this.productCnt = parseInt(data.msg);

@@ -1,17 +1,54 @@
 <div class="container">
     <h1>Printing House</h1>
-    <h3>Ukupan broj objekata: {{productCnt}}</h3>
+    @if (productCnt !== -1) {
+        <h3>Ukupan broj objekata: {{ productCnt }}</h3>
+    }
 
     <div class="cards-container">
-        @for(p of products; track p.id){
-        <div class="card">
-            <h3>{{p.name}}</h3>
+        @for (p of products; track p.id) {
+            <div class="card">
 
-            <div class="card-footer">
-                <p class="desc">{{p.description}}</p>
-                <p class="likes">👍{{p.like_cnt}}</p>
+                @if (p.image) {
+                    <img
+                        class="card-image"
+                        [src]="p.image"
+                        [alt]="p.name"
+                    >
+                }
+
+                <div class="card-content">
+                    <h3>{{ p.name }}</h3>
+
+
+                    <div class="card-footer">
+                        <p class="desc">
+                            {{ p.description }}
+                        </p>
+
+                        <div class="card-info">
+                            <span class="price">
+                                {{ p.price }} RSD
+                            </span>
+
+                            <span class="stock">
+                                Stock: {{ p.stock }}
+                            </span>
+                        </div>
+
+                        <div class="reactions">
+                            <span class="likes">
+                                👍 {{ p.like_cnt }}
+                            </span>
+                            <!--
+                            <span class="dislikes">
+                                👎 {{ p.dislike_cnt }}
+                            </span>
+                            -->
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
         }
     </div>
 </div>

@@ -79,7 +79,7 @@ public class Product {
         return image;
     }
     public void setImage(String image) {
-        this.image = image;
+        this.image = "http://localhost:8080/images/products/" + image;
     }
     public Product(int id, String print_id, String code, String name, String description, String subcategory,
             double price, int stock, int like_cnt, int dislike_cnt, String image) {

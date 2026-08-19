@@ -4,7 +4,7 @@ export class Product {
   code: string = '';
   name: string = '';
   description: string = '';
-  subcategory: string = '';
+  subcategory: number = 0;
   price: number = 0.0;
   stock: number = 0;
   like_cnt: number = 0;
@@ -16,7 +16,7 @@ export class Product {
     code: string,
     name: string,
     description: string,
-    subcategory: string,
+    subcategory: number,
     price: number,
     stock: number,
     like_cnt: number,

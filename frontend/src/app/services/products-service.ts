@@ -18,7 +18,22 @@ export class ProductsService {
     return this.http.get<Product[]>(`${this.path}/getTopProducts`);
   }
 
-  findProducts(param: string) {
+  findProductById(id: number) {
+    return this.http.get<Product>(`${this.path}/findById?id=${id}`);
+  }
+
+  findProducts(category: string, param: string){
+    if(category){
+      return this.findProductsByCategory(category, param);
+    }
+    return this.findProductsByName(param);
+  }
+
+  findProductsByName(param: string) {
     return this.http.get<Product[]>(`${this.path}/find?param=${param}`);
+  }
+
+  findProductsByCategory(category: string, param: string) {
+    return this.http.get<Product[]>(`${this.path}/findByCategory/${category}?param=${param}`);
   }
 }

@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Product } from '../models/Product';
+import { ProductsService } from '../services/products-service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,105 +13,69 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 })
 export class Navbar {
   private router = inject(Router);
+  private productService = inject(ProductsService);
   searchTerm: string = '';
   selectedCategory: number = 0;
+  suggestions: Product[] = [];
 
   categories: any[] = [
-    {
-        id: 1,
-        name: "Stampa malih formata"
-    },
-    {
-        id: 2,
-        name: "Stampa velikih formata"
-    },
-    {
-        id: 3,
-        name: "Kreativne stampe"
-    }
-];
-  suggestions: any[] = [];
+        {
+            id: 1,
+            name: "Stampa malih formata"
+        },
+        {
+            id: 2,
+            name: "Stampa velikih formata"
+        },
+        {
+            id: 3,
+            name: "Kreativne stampe"
+        }
+    ];
 
 
-  onSearch() {
-      if (this.selectedCategory !== 0) {
+    onSearch() {
+        this.suggestions = [];
+        if (this.selectedCategory !== 0) {
+            const category = this.categories.find(
+            category => category.id === this.selectedCategory
+        );
 
-          const category = this.categories.find(
-              category => category.id === this.selectedCategory
-          );
-
-          this.router.navigate(
-              [`search/${category.name}`],
-              {
-                  queryParams: {
-                      name: this.searchTerm || null
-                  }
-              }
-          );
-
+        this.router.navigate(
+            [`search/${category.name}`],
+            {
+                queryParams: {
+                    search: this.searchTerm || null
+                }
+            }
+        );
       } else {
-
-          this.router.navigate(
-              ['search'],
-              {
-                  queryParams: {
-                      name: this.searchTerm || null
-                  }
-              }
+        this.router.navigate(['search'],
+            {
+                queryParams: {
+                    search: this.searchTerm || null
+                }
+            }
           );
-
       }
-  }
-  products = [
-    {
-      id: 1,
-      name: 'Hemijska olovka',
-      category: 'Reklamni materijal'
-    },
-    {
-      id: 2,
-      name: 'Polo majica',
-      category: 'Tekstil'
-    },
-    {
-      id: 3,
-      name: 'Šolja',
-      category: 'Reklamni materijal'
-    },
-    {
-      id: 4,
-      name: 'Vizit karta',
-      category: 'Papirni proizvodi'
-    },
-    {
-      id: 5,
-      name: 'Majica',
-      category: 'Tekstil'
     }
-  ];
-
-
-  onSearchInput() {
-
-    const term = this.searchTerm.trim().toLowerCase();
-    if (!term) {
-      this.suggestions = [];
-      return;
+    onSearchInput() {
+        const term = this.searchTerm.trim();
+        if (!term) {
+        this.suggestions = [];
+        return;
+        }
+        const category = this.categories.find(
+            category => category.id === this.selectedCategory
+        );
+        this.productService.findProducts(category?.name || '', this.searchTerm).subscribe(data => {
+        this.suggestions = data;
+        })
     }
 
-    this.suggestions = this.products
-      .filter(product =>
-        product.name.toLowerCase().includes(term)
-      )
-      .slice(0, 5);
-  }
-
-  selectProduct(product: any) {
-
-    this.searchTerm = product.name;
-
-    this.suggestions = [];
-
-    this.onSearch();
-  }
+    selectProduct(product: any) {
+        this.searchTerm = product.name;
+        this.suggestions = [];
+        this.onSearch();
+    }
 }

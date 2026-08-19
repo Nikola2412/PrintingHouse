@@ -11,6 +11,7 @@ import com.example.backend.models.Message;
 import com.example.backend.models.Product;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -34,5 +35,10 @@ public class productController {
     public List<Product> getMethodName(@RequestParam String param) {
         return new productRepo().findProducts(param);
     }
+    @GetMapping("/findByCategory/{category}")
+    public List<Product> findProductsByCategory(@PathVariable String category, @RequestParam String param) {
+        return new productRepo().findProductsByCategory(category, param);
+    }
+    
     
 }

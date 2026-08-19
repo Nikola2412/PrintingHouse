@@ -9,4 +9,5 @@ public interface productInterface {
     public Message getProductCnt();
     public List<Product> getTopProducts();
     public List<Product> findProducts(String searchParam);
+    public List<Product> findProductsByCategory(String category, String searchParam);
 }
