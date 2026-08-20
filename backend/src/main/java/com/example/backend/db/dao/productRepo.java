@@ -6,11 +6,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.backend.db.DB;
 import com.example.backend.models.Message;
 import com.example.backend.models.Product;
 import com.example.backend.models.ProductDitails;
 
+@Repository
 public class productRepo implements productInterface {
 
     @Override

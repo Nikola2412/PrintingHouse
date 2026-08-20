@@ -17,6 +17,8 @@ import com.example.backend.models.Message;
 import com.example.backend.models.Product;
 import com.example.backend.models.ProductDitails;
 
+import jakarta.annotation.PostConstruct;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,36 +30,49 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin(origins = "http://localhost:4200/")
 public class productController {
     
+    private final productRepo productRepo;
+
+    public productController(productRepo productRepo) {
+        this.productRepo = productRepo;
+    }
+
+
     @GetMapping("/getProductCnt")
     public Message getCnt() {
-        return new productRepo().getProductCnt();
+        return productRepo.getProductCnt();
     }
     
     @GetMapping("/getTopProducts")
     public List<Product> getTopProducts() {
-        return new productRepo().getTopProducts();
+        return productRepo.getTopProducts();
     }
     
     @GetMapping("/product")
     public Product getProductByID(@RequestParam Long id) {
-        return new productRepo().findProductByID(id);
+        return productRepo.findProductByID(id);
     }
 
     @GetMapping("/productDitails")
     public ProductDitails PorductDitails(@RequestParam Long id) {
-        return new productRepo().getPorductDitails(id);
+        return productRepo.getPorductDitails(id);
     }
     
+    @PostConstruct
+    public void init() {
+        System.out.println("Working directory: " + System.getProperty("user.dir"));
+        System.out.println("Upload path: " + uploadPath);
+    }
+
 
     private String uploadPath = Paths
-                .get("backend/uploads")
+                .get("uploads")
                 .toAbsolutePath()
                 .normalize()
                 .toString();
 
     @GetMapping("/image/{id}")
     public ResponseEntity<Resource> getMainImage(@PathVariable Long id) {
-        String name = new productRepo().getMainImage(id);
+        String name = productRepo.getMainImage(id);
 
         if (name == null || name.isBlank()) {
             return ResponseEntity.notFound().build();
@@ -79,7 +94,7 @@ public class productController {
 
     @GetMapping("/images/{id}")
     public ResponseEntity<Resource> getImages(@PathVariable Long id) {
-        String name = new productRepo().getImage(id);
+        String name = productRepo.getImage(id);
 
         if (name == null || name.isBlank()) {
             return ResponseEntity.notFound().build();
@@ -104,11 +119,11 @@ public class productController {
     //http://localhost:8080/products/find?param=H
     @GetMapping("/find")
     public List<Product> findProductBySeachParam(@RequestParam String param) {
-        return new productRepo().findProductsBySearchParam(param);
+        return productRepo.findProductsBySearchParam(param);
     }
     @GetMapping("/findByCategory/{category}")
     public List<Product> findProductsByCategory(@PathVariable String category, @RequestParam String param) {
-        return new productRepo().findProductsByCategory(category, param);
+        return productRepo.findProductsByCategory(category, param);
     }
     
     

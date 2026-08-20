@@ -17,14 +17,14 @@ export class ProductDitails implements OnInit{
 
   item: ProductInfo = new ProductInfo();
 
-  selectedImageId: number = -1;
+  selectedImageId: number = 0;
 
   ngOnInit(): void {
     const id = this.activRoute.snapshot.paramMap.get('id')!;
 
     this.productServices.productDitails(id).subscribe(data => {
-      console.log('DATA:', data);
-      console.log('IMAGES:', data.images);
+      //console.log('DATA:', data);
+      //console.log('IMAGES:', data.images);
 
       this.item = {
         ...data,
@@ -40,9 +40,9 @@ export class ProductDitails implements OnInit{
         this.selectedImageId =
           this.item.images.length > 0
             ? this.item.images[0]
-            : -1;
+            : 0;
       }
-      console.log(this.selectedImageId);
+      //console.log(this.selectedImageId);
       
     });
   }
